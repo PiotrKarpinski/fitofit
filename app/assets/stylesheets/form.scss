@@ -1,0 +1,20 @@
+
+.styled-form {
+  border-collapse: collapse;
+  margin: 25px 0;
+  width: 400px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  padding: 12px 15px;
+
+  .field {
+    display: flex;
+  }
+
+  .btn-submit input {
+    padding: 4px 6px;
+    border-radius: 4px;
+    border: none;
+    background-color: #6f0098;
+    color: white;
+  }
+}

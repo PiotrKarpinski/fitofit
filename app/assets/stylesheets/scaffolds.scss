@@ -3,10 +3,6 @@ body {
   color: #333;
   margin: 33px; }
 
-body, p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px; }
 
 pre {
   background-color: #eee;
@@ -62,4 +58,6 @@ div.actions {
   list-style: square; }
 
 label {
-  display: block; }
+  display: inline;
+  width: 30%;
+}
