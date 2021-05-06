@@ -11,9 +11,21 @@
     </div>
   <% end %>
 
+  <p>
+    Please provide address in the following format:<br/>
+    <span class="text-italic">
+      Street name, City, Country
+    </span>
+  </p>
+
   <div class="field">
-    <%= form.label :distance %>
-    <%= form.number_field :distance %>
+    <%= form.label :starting_address %>
+    <%= form.text_field :starting_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_address %>
+    <%= form.text_field :end_address %>
   </div>
 
   <div class="actions">

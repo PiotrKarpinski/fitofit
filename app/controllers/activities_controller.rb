@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: %i[ show edit update destroy ]
+  before_action :set_activity, only: %i[ show edit update destroy]
 
   # GET /activities or /activities.json
   def index
@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
     respond_to do |format|
       if @activity.save
         format.html { redirect_to @activity, notice: "Activity was successfully created." }
-        format.json { render :show, status: :created, location: @activity }
+        format.json { render :statistics, status: :created, location: @activity }
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @activity.errors, status: :unprocessable_entity }
@@ -56,14 +56,19 @@ class ActivitiesController < ApplicationController
     end
   end
 
+  def statistics
+    @activities = Activity.all
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_activity
-      @activity = Activity.find(params[:id])
-    end
+  def set_activity
+    @activity = Activity.find(params[:id])
+  end
 
     # Only allow a list of trusted parameters through.
-    def activity_params
-      params.require(:activity).permit(:distance)
-    end
+  def activity_params
+    params.require(:activity).permit(:starting_address, :end_address)
+  end
 end
