@@ -1,6 +1,7 @@
 class Activity < ApplicationRecord
   require 'geocoder'
   attr_accessor :starting_address, :end_address
+  validates_presence_of :starting_address, :end_address
   before_save :set_distance
 
   private
