@@ -1,31 +1,26 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: %i[ show edit update destroy]
 
-  # GET /activities or /activities.json
   def index
     @activities = Activity.all
   end
 
-  # GET /activities/1 or /activities/1.json
   def show
   end
 
-  # GET /activities/new
   def new
     @activity = Activity.new
   end
 
-  # GET /activities/1/edit
   def edit
   end
 
-  # POST /activities or /activities.json
   def create
     @activity = Activity.new(activity_params)
 
     respond_to do |format|
       if @activity.save
-        format.html { redirect_to @activity, notice: "Activity was successfully created." }
+        format.html { redirect_to root_path, notice: "Activity was successfully created." }
         format.json { render :statistics, status: :created, location: @activity }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -34,7 +29,6 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /activities/1 or /activities/1.json
   def update
     respond_to do |format|
       if @activity.update(activity_params)
@@ -47,7 +41,6 @@ class ActivitiesController < ApplicationController
     end
   end
 
-  # DELETE /activities/1 or /activities/1.json
   def destroy
     @activity.destroy
     respond_to do |format|
@@ -57,18 +50,24 @@ class ActivitiesController < ApplicationController
   end
 
   def statistics
-    @activities = Activity.all
-
+    activities_per_days = Activity.group_by_day
+    @activities = []
+    activities_per_days.each do |day, activities|
+      row = {
+        distance: activities.select(&:distance).sum(&:distance),
+        created_at: day
+      }
+      @activities << row
+    end
+    @activities
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
   def set_activity
     @activity = Activity.find(params[:id])
   end
 
-    # Only allow a list of trusted parameters through.
   def activity_params
-    params.require(:activity).permit(:starting_address, :end_address)
+    params.require(:activity).permit(:starting_address, :end_address, :created_at)
   end
 end
