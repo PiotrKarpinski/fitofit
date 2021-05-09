@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   before_action :set_activity, only: %i[ show edit update destroy]
 
   def index
-    @activities = Activity.all
+    @activities = Activity.all.order(created_at: :desc)
   end
 
   def show
@@ -10,6 +10,7 @@ class ActivitiesController < ApplicationController
 
   def new
     @activity = Activity.new
+
   end
 
   def edit
@@ -63,11 +64,16 @@ class ActivitiesController < ApplicationController
   end
 
   private
+
   def set_activity
     @activity = Activity.find(params[:id])
   end
 
   def activity_params
-    params.require(:activity).permit(:starting_address, :end_address, :created_at)
+    params.require(:activity).permit(:starting_street,
+                                     :starting_city,
+                                     :starting_country, :end_street,
+                                     :end_city,
+                                     :end_country, :created_at)
   end
 end

@@ -22,12 +22,19 @@
 
   <div class="field">
     <%= form.label :starting_address %>
-    <%= form.text_field :starting_address %>
+
+    <%= form.text_field :starting_street, placeholder: 'Street' %>
+    <%= form.text_field :starting_city, placeholder: 'City' %>
+    <%= form.text_field :starting_country, placeholder: 'Country' %>
+
   </div>
 
   <div class="field">
     <%= form.label :end_address %>
-    <%= form.text_field :end_address %>
+
+    <%= form.text_field :end_street, placeholder: 'Street' %>
+    <%= form.text_field :end_city, placeholder: 'City' %>
+    <%= form.text_field :end_country, placeholder: 'Country' %>
   </div>
 
   <p class="text-italic">
