@@ -12,12 +12,19 @@
   </thead>
 
   <tbody>
+  <%if @activities.empty? %>
+    <tr>
+      <td>-</td>
+      <td>-</td>
+    </tr>
+  <% end %>
     <% @activities.each do |activity| %>
       <tr>
         <td><%= format_date(activity[:created_at]) %></td>
         <td><%= format_distance(activity[:distance]) %></td>
       </tr>
     <% end %>
+
   </tbody>
 </table>
 
